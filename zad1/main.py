@@ -5,7 +5,8 @@ app = flask.Flask(__name__)
 
 @app.route('/rev/<query>', methods=['GET'])
 def rev(query):
-    return query[::-1]
+    response = {"reversed": query[::-1]}
+    return response
 
 
 app.run()
