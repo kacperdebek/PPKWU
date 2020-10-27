@@ -15,3 +15,10 @@ Locate the project folder where the main.py resides.
 Run the script using command 'python ./main.py'
 In your console you should see something like 'Running on http://127.0.0.1:5000/'
 That means you are good to go!
+
+==API functionality==
+This api takes any string as an argument, and returns a json response with four fields:
+-hasLower: (True or False) - determines whether given string contains any lower case letters
+-hasUpper: (True or False) - determines whether given string contains any upper case letters
+-hasSpecial: (True or False) - determines whether given string contains any special (non alphanumeric) characters
+-hasNumber: (True or False) - determines whether given string contains any numeric characters
