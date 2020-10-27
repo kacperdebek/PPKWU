@@ -1,0 +1,4 @@
+==Prerequisites==
+-installed python (type 'python --version' in your command line to verify that)
+-installed flask (type 'flask --version' in your command line to verify that)
+If both of these commands return correct responses you're good to go!
