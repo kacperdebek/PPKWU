@@ -22,3 +22,20 @@ This api takes any string as an argument, and returns a json response with four 
 -hasUpper: (True or False) - determines whether given string contains any upper case letters
 -hasSpecial: (True or False) - determines whether given string contains any special (non alphanumeric) characters
 -hasNumber: (True or False) - determines whether given string contains any numeric characters
+
+==Accessing the endpoint==
+The endpoint is located at the /string/ path, so locally your whole path should look like this:
+http://127.0.0.1:5000/string/{query}
+
+You want to substitute {query} for any string you'd like to see the information shown in the API functionality section
+
+==Example response==
+For a query like http://127.0.0.1:5000/string/ExAmPle33 the api would respond with:
+{
+    "hasLower":true,
+    "hasNumber":true,
+    "hasSpecial":false,
+    "hasUpper":true
+}
+Which correctly tells us that the string 'ExAmPle33' contains both upper and lower case letters, numeric chars but
+no special chars.
