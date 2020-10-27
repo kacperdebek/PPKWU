@@ -13,7 +13,11 @@ def string_has_lowercase(query):
 
 @app.route('/string/<query>', methods=['GET'])
 def rev(query):
-    return f"Success! Parameter: {query}"
+    result = {
+        "hasUpper": string_has_uppercase(query),
+        "hasLower": string_has_lowercase(query)
+    }
+    return result
 
 
 app.run()
