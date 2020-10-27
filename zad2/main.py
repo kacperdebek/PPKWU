@@ -11,11 +11,16 @@ def string_has_lowercase(query):
     return True if any(letter.islower() for letter in query) else False
 
 
+def string_has_number(query):
+    return True if any(letter.isdigit() for letter in query) else False
+
+
 @app.route('/string/<query>', methods=['GET'])
 def rev(query):
     result = {
         "hasUpper": string_has_uppercase(query),
-        "hasLower": string_has_lowercase(query)
+        "hasLower": string_has_lowercase(query),
+        "hasNumber": string_has_number(query)
     }
     return result
 
