@@ -13,14 +13,10 @@ event_names = soup.find_all('div', {"class": "InnerBox"})
 for elem in event_names:
     print(elem.text)
 
-calendar_dict = [[elem.text, elem.get('href')] for elem in calendar_days]
+calendar_dict = [[elem.text, elem.get('href')] for elem in calendar_days if elem.get('href') != "javascript:void();"]
 for elem in calendar_dict:
-    if elem[1] == "javascript:void();":
-        elem.append("")
-    else:
-        elem.append(event_names.pop(0).text)
+    elem.append(event_names.pop(0).text)
 
 print(calendar_dict)
-
 
 
