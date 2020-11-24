@@ -49,4 +49,15 @@ def october_calendar(filename):
     return send_file(filename, mimetype="text/calendar")
 
 
+@app.route('/march', methods=['GET'])
+def march_redirect():
+    return redirect('/march/march.ics')
+
+
+@app.route('/march/<filename>', methods=['GET'])
+def march_calendar(filename):
+    create_calendar(get_calendar_data("03"), 'march')
+    return send_file(filename, mimetype="text/calendar")
+
+
 app.run()
