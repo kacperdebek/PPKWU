@@ -3,6 +3,9 @@ from bs4 import BeautifulSoup
 from icalendar import Calendar, Event
 from datetime import datetime
 from pytz import UTC  # timezone
+from flask import Flask
+
+app = Flask(__name__)
 
 
 def create_calendar(l):
@@ -33,4 +36,6 @@ def get_calendar_data(month):
         elem.append(event_names.pop(0).text)
     return calendar_dict
 
+
 # create_calendar(calendar_dict)
+# app.run()
