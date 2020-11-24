@@ -21,17 +21,16 @@ def create_calendar(l):
     f.close()
 
 
-url = 'http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=2020&miesiac=10&lang=1'
-r = requests.get(url)
-soup = BeautifulSoup(r.text, features="html.parser")
-print(r.text)
-calendar_days = soup.find_all('a', href=True)[2:]
-event_names = soup.find_all('div', {"class": "InnerBox"})
-for elem in event_names:
-    print(elem.text)
+def get_calendar_data(month):
+    url = f'http://www.weeia.p.lodz.pl/pliki_strony_kontroler/kalendarz.php?rok=2020&miesiac={month}&lang=1'
+    r = requests.get(url)
+    soup = BeautifulSoup(r.text, features="html.parser")
+    calendar_days = soup.find_all('a', {"class": "active"})
+    event_names = soup.find_all('div', {"class": "InnerBox"})
 
-calendar_dict = [[elem.text, elem.get('href')] for elem in calendar_days if elem.get('href') != "javascript:void();"]
-for elem in calendar_dict:
-    elem.append(event_names.pop(0).text)
+    calendar_dict = [[elem.text, elem.get('href')] for elem in calendar_days]
+    for elem in calendar_dict:
+        elem.append(event_names.pop(0).text)
+    return calendar_dict
 
-create_calendar(calendar_dict)
+# create_calendar(calendar_dict)
