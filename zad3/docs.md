@@ -23,3 +23,10 @@ Endpoint | Response
 ------------ | -------------
 http://127.0.0.1:5000/march | downloadable `march.ics` file containing events from weeia main page
 http://127.0.0.1:5000/october | downloadable `october.ics` file containing events from weeia main page
+
+
+## Example response
+Accessing the endpoint `http://127.0.0.1:5000/march` the api would respond with:
+![Response](march.png)
+
+Which contains all the events data pulled from http://www.weeia.p.lodz.pl/ regarding the month of march 2020.
