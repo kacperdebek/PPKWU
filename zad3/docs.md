@@ -30,3 +30,8 @@ Accessing the endpoint `http://127.0.0.1:5000/march` the api would respond with:
 ![Response](march.png)
 
 Which contains all the events data pulled from http://www.weeia.p.lodz.pl/ regarding the month of march 2020.
+
+## Using the ics file
+After you download the .ics file, you should be able to use it in almost any calendar app by importing it.  
+For instance for Google Calendar just go to `Settings->Import & Export` and import the file from your disk there.
+All the events should be successfully added to your calendar.
