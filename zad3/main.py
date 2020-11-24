@@ -3,23 +3,24 @@ from bs4 import BeautifulSoup
 from icalendar import Calendar, Event
 from datetime import datetime
 from pytz import UTC  # timezone
-from flask import Flask
+from flask import Flask, send_file
+from flask import redirect
 
 app = Flask(__name__)
 
 
-def create_calendar(l):
+def create_calendar(l, month):
     cal = Calendar()
-
+    m = 3 if month == 'march' else 10
     for ev in l:
         event = Event()
         event.add('summary', ev[2])
-        event.add('dtstart', datetime(2020, 11, int(ev[0]), 0, 0, 0, tzinfo=UTC))
-        event.add('dtend', datetime(2020, 11, int(ev[0]), 23, 0, 0, tzinfo=UTC))
+        event.add('dtstart', datetime(2020, m, int(ev[0]), 8, 0, 0, tzinfo=UTC))
+        event.add('dtend', datetime(2020, m, int(ev[0]), 16, 0, 0, tzinfo=UTC))
         event.add('description', ev[1])
         cal.add_component(event)
 
-    f = open('calendar.ics', 'wb')
+    f = open(f'{month}.ics', 'wb')
     f.write(cal.to_ical())
     f.close()
 
@@ -37,5 +38,15 @@ def get_calendar_data(month):
     return calendar_dict
 
 
-# create_calendar(calendar_dict)
-# app.run()
+@app.route('/october', methods=['GET'])
+def october_redirect():
+    return redirect('/october/october.ics')
+
+
+@app.route('/october/<filename>', methods=['GET'])
+def october_calendar(filename):
+    create_calendar(get_calendar_data("10"), 'october')
+    return send_file(filename, mimetype="text/calendar")
+
+
+app.run()
