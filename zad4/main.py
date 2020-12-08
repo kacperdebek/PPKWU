@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import vobject
 
 
 def scrape_data(query):
@@ -18,3 +19,15 @@ def scrape_data(query):
                     zip(emails_and_names, phone_numbers, addresses)]
     return company_data
 
+
+def generate_vcard(company_list):
+    for company in company_list:
+        vc = vobject.vCard()
+        vc.add('fn').value = company['name']
+        vc.add('email').value = company['email']
+        vc.add('tel').value = company['phone']
+        vc.add('adr').value = vobject.vcard.Address(company['address'])
+        print(vc.serialize())
+
+
+generate_vcard(scrape_data("hydraulik"))
