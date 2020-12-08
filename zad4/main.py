@@ -20,7 +20,7 @@ def scrape_data(query):
     return company_data
 
 
-def generate_vcard(company_list):
+def generate_vcards(company_list):
     for company in company_list:
         vc = vobject.vCard()
         vc.add('fn').value = company['name']
@@ -30,4 +30,34 @@ def generate_vcard(company_list):
         print(vc.serialize())
 
 
-generate_vcard(scrape_data("hydraulik"))
+def generate_page(company_list):
+    template = """
+    <body>
+        <table style="width:100%">
+        <tr>
+            <th>Company</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Vcard</th>
+        </tr>
+    """
+    for company in company_list:
+        template += f"""
+        <tr>
+            <td>{company['name']}</td>
+            <td>{company['email']}</td>
+            <td>{company['address']}</td>
+            <td>{company['phone']}</td>
+            <td>"todo"</td>
+        </tr>
+        """
+    template += """
+        </table> 
+        </body>
+        """
+    print(template)
+
+
+generate_page(scrape_data("hydraulik"))
+# generate_vcards(scrape_data("hydraulik"))
