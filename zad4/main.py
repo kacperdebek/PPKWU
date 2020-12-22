@@ -55,7 +55,7 @@ def generate_page(company_list):
                 <td>{company['email']}</td>
                 <td>{company['address']}</td>
                 <td>{company['phone']}</td>
-                <td>"todo"</td>
+                <td><a href="http://127.0.0.1:5000/vcf/files/company_{id}.vcf">wygeneruj VCard</a></td>
             </tr>
             """
     template += """
@@ -79,6 +79,10 @@ generate_page(scrape_data("hydraulik"))
 
 
 # generate_vcards(scrape_data("hydraulik"))
+
+@app.route('/vcf/files/<filename>', methods=['GET'])
+def vcf_generate(filename):
+    return send_file(f'files/{filename}', mimetype="text/vcard")
 
 
 @app.route('/vcf/<query>', methods=['GET'])
