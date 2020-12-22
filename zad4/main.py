@@ -78,8 +78,6 @@ generate_vcf_files(generate_vcards(scrape_data("hydraulik")))
 generate_page(scrape_data("hydraulik"))
 
 
-# generate_vcards(scrape_data("hydraulik"))
-
 @app.route('/vcf/files/<filename>', methods=['GET'])
 def vcf_generate(filename):
     return send_file(f'files/{filename}', mimetype="text/vcard")
