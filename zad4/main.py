@@ -12,22 +12,24 @@ def scrape_data(query):
     phone_numbers = soup.findAll('a', {"class": "icon-telephone"})
     emails_and_names = soup.findAll('a', {"class": "ajax-modal-link"})
 
-    company_data = [{'name': name.get('data-company-name'),
-                     'email': name.get('data-company-email'),
-                     'phone': phone.get('title'),
-                     'address': address.text.strip()} for name, phone, address in
+    company_data = [{'name': name.get('data-company-name') or "N/A",
+                     'email': name.get('data-company-email') or "N/A",
+                     'phone': phone.get('title') or "N/A",
+                     'address': address.text.strip() or "N/A"} for name, phone, address in
                     zip(emails_and_names, phone_numbers, addresses)]
     return company_data
 
 
 def generate_vcards(company_list):
+    vcard_list = []
     for company in company_list:
         vc = vobject.vCard()
         vc.add('fn').value = company['name']
         vc.add('email').value = company['email']
         vc.add('tel').value = company['phone']
         vc.add('adr').value = vobject.vcard.Address(company['address'])
-        print(vc.serialize())
+        vcard_list.append(vc.serialize())
+    return vcard_list
 
 
 def generate_page(company_list):
