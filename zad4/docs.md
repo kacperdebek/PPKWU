@@ -22,3 +22,17 @@ for results based on a search performed on `https://panoramafirm.pl/szukaj` webs
 Endpoint | Response
 ------------ | -------------
 http://127.0.0.1:5000/vcf/{query} | company data & vcards from `https://panoramafirm.pl/szukaj?k={query}`
+
+## Example response
+Accessing the endpoint `http://127.0.0.1:5000/vcf/mechanik` the api would respond with following page:
+![Response](page.png)
+
+Which contains search data pulled from `https://panoramafirm.pl/szukaj` using the `mechanik` 
+search query. Links in the Vcard column all contain downloadable vcf files, clicking any of them
+results in a download file prompt like this:
+![Prompt](prompt.png)
+
+## Using the vcf file
+After you download the .vcf file, you should be able to open it on your mobile phone.  
+Following the file opening, the contact information contained in the file should automatically
+be imported into your phone's contact list.
