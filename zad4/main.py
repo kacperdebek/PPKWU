@@ -61,5 +61,12 @@ def generate_page(company_list):
     print(template)
 
 
+def generate_vcf_files(data):
+    for num, company in enumerate(data, 1):
+        f = open(f'files/company_{num}.vcf', 'w', encoding="utf-8")
+        f.write(company)
+        f.close()
+
+
 generate_page(scrape_data("hydraulik"))
 # generate_vcards(scrape_data("hydraulik"))
